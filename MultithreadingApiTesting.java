@@ -7,7 +7,7 @@ public class MultithreadingApiTesting {
 
     public static void main(String[] args) throws Exception {
         long startTime = System.currentTimeMillis();
-        log("Calling two APIs in parallel...\n");
+        log("Calling two APIs in parallel...");
 
         // Start both tasks asynchronously using CompletableFuture
         CompletableFuture<String> weatherFuture = getWeatherAsync();
@@ -20,8 +20,8 @@ public class MultithreadingApiTesting {
         String weatherResult = weatherFuture.get();
         double stockResult = stockPriceFuture.get();
 
-        log("✅ Weather API Result: " + weatherResult);
-        log("✅ Stock API Result: $" + stockResult);
+        log("Weather API Result: " + weatherResult);
+        log("Stock API Result: $" + stockResult);
 
         long endTime = System.currentTimeMillis();
         log("Total Time: " + (endTime - startTime) + " ms");
@@ -35,7 +35,7 @@ public class MultithreadingApiTesting {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-            log("✅ Delay and Returned Completed getWeatherAsync");
+            log("Delay and Returned Completed getWeatherAsync");
             return "Sunny, 75°F";
         });
     }
@@ -48,7 +48,7 @@ public class MultithreadingApiTesting {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-            log("✅ Delay and Returned Completed getStockPriceAsync");
+            log("Delay and Returned Completed getStockPriceAsync");
             return Math.round((100 + Math.random() * 900) * 100.0) / 100.0;
         });
     }
@@ -59,3 +59,12 @@ public class MultithreadingApiTesting {
         System.out.println("[" + time + "] " + message);
     }
 }
+
+/*
+[17:50:22.527] Calling two APIs in parallel...
+[17:50:24.597] Delay and Returned Completed getStockPriceAsync
+[17:50:27.597] Delay and Returned Completed getWeatherAsync
+[17:50:27.597] Weather API Result: Sunny, 75?F
+[17:50:27.603] Stock API Result: $230.78
+[17:50:27.607] Total Time: 5084 ms
+*/
