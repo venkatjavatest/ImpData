@@ -60,18 +60,18 @@ public class MultithreadingEmployeeBatchSaveSimulation {
                 public Integer call() {
                     try {
                         // Simulate delay for saving batch to DB
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
 
                         // Simulate error in 10th batch (index 9)
                         if (batchIndex == 9) {
                             throw new RuntimeException("Simulated error in batch " + batchIndex);
                         }
 
-                        log("Saved batch: " + batch.size());
+                        // log("Saved batch: " + batch.size());
                         return batch.size();
                     } catch (Exception e) {
                         log("Error saving batch: " + e.getMessage());
-                        return 0;
+                        throw new RuntimeException(e);
                     }
                 }
             };
